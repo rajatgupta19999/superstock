@@ -1,23 +1,34 @@
 package com.jp.simplestocks.domain;
 
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-
-@Builder
-@Getter
-@Setter
 public class Stock {
 
-	private enum Type{
-		COMMON,
-		PREFERED
+	public enum Type {
+		COMMON, PREFERRED
 	}
-	private final String symbol;
-	private double lastDividend;
-	private double fixedDividend;
-	private double parValue;
-	
-	
+
+	public final Type type;
+	public final String symbol;
+	public double lastDividend;
+	public int fixedDividend;
+	public double parValue;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 * @param symbol
+	 * @param lastDividend
+	 * @param fixedDividend
+	 * @param parValue
+	 */
+
+	public Stock(Type type, String symbol, double lastDividend, int fixedDividend, double parValue) {
+		super();
+		this.type = type;
+		this.symbol = symbol;
+		this.lastDividend = lastDividend;
+		this.fixedDividend = fixedDividend;
+		this.parValue = parValue;
+	}
+
 }
