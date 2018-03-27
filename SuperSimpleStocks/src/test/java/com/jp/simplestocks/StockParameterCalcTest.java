@@ -41,6 +41,7 @@ public class StockParameterCalcTest {
 	@Test
 	public void testCalculateVolumeWeightedStockPrice() {
 		Stock stock = new Stock(Type.COMMON,"TEA", 0.0, 0, 1.0);
+		Stock stock1 = new Stock(Type.COMMON,"GIN", 0.0, 0, 1.0);
 		List<Trade> trades = new ArrayList<>();
 		trades.add(new Trade(stock, Indicator.BUY, 0.10, 10, System.currentTimeMillis()));
 		trades.add(new Trade(stock, Indicator.BUY, 0.09, 10, System.currentTimeMillis()));
@@ -49,7 +50,8 @@ public class StockParameterCalcTest {
 		trades.add(new Trade(stock, Indicator.BUY, 0.1, 10, System.currentTimeMillis()));
 		trades.add(new Trade(stock, Indicator.BUY, 0.11, 10, System.currentTimeMillis()));
 		trades.add(new Trade(stock, Indicator.BUY, 0.12, 10, System.currentTimeMillis()));
-		assertEquals(0.0985, StockParameterCalc.calculateVolumeWeightedStockPrice(trades), delta);
+		trades.add(new Trade(stock1, Indicator.BUY, 0.12, 10, System.currentTimeMillis()));
+		assertEquals(0.0985, StockParameterCalc.calculateVolumeWeightedStockPrice(trades,stock), delta);
 	}
 
 	@Test

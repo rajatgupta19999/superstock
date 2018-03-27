@@ -58,4 +58,21 @@ public class TradeServiceTest {
 		assertEquals(filterpast5minTrades.size(),3);
 		assertEquals(filterpast5minTrades.contains(past6minTrade),false);
 	}
+	
+	@Test
+	public void testFilterTradesByStock() {
+		Stock stock = new Stock(Type.COMMON, "POP", 8.0, 0, 100.0);
+		Stock stock1 = new Stock(Type.COMMON, "TEA", 8.0, 0, 100.0);
+		long timeStamp = System.currentTimeMillis();
+		Trade trade = TradeService.recordBuyTrade(stock, 3.0, 3, timeStamp);
+		Trade trade1 = TradeService.recordSellTrade(stock1, 3.0, 3, timeStamp-2000);
+		Trade trade2 = TradeService.recordBuyTrade(stock, 5.0, 300, timeStamp-1000);
+		List<Trade> trades = new ArrayList<>();
+		trades.add(trade);
+		trades.add(trade1);
+		trades.add(trade2);
+		List<Trade> filterTrades = TradeService.filterTradesByStocks(trades,stock1);
+		assertEquals(filterTrades.size(),1);
+		assertEquals(filterTrades.contains(stock1),false);
+	}
 }

@@ -79,12 +79,13 @@ public class StockParameterCalc {
 	 * @param trades
 	 * @return
 	 */
-	public static double calculateVolumeWeightedStockPrice(List<Trade> trades) {
+	public static double calculateVolumeWeightedStockPrice(List<Trade> trades,Stock stock) {
 		List<Trade> past15minTrades = TradeService.filterTradesByTimestamp(trades, System.currentTimeMillis(),
 				15 * 60 * 1000);
+		List<Trade> filterTrades = TradeService.filterTradesByStocks(past15minTrades,stock);
 		double allTradesValue = 0.0;
 		double totalQuantity = 0.0;
-		for (Trade trade : past15minTrades) {
+		for (Trade trade : filterTrades) {
 			allTradesValue += (trade.price * trade.quantity);
 			totalQuantity += trade.quantity;
 		}

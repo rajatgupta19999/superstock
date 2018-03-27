@@ -11,6 +11,7 @@ public class TradeService {
 
 	/**
 	 * Record a Buy Trade
+	 * 
 	 * @param stock
 	 * @param price
 	 * @param quantity
@@ -23,6 +24,7 @@ public class TradeService {
 
 	/**
 	 * Record a Sell Trade
+	 * 
 	 * @param stock
 	 * @param price
 	 * @param quantity
@@ -35,15 +37,28 @@ public class TradeService {
 
 	/**
 	 * Filter Trades based on trades in past 15 minutes
+	 * 
 	 * @param trades
 	 * @param timeInMillis
 	 * @param intervalInMillis
 	 * @return
 	 */
 	public static List<Trade> filterTradesByTimestamp(List<Trade> trades, long timeInMillis, long intervalInMillis) {
-		return trades.stream()
-				.filter(trade -> (timeInMillis - intervalInMillis <= trade.timestamp && trade.timestamp <= timeInMillis))
+		return trades.stream().filter(
+				trade -> (timeInMillis - intervalInMillis <= trade.timestamp && trade.timestamp <= timeInMillis))
 				.collect(Collectors.toList());
+	}
+
+	/**
+	 * Filter Trades based on stocks
+	 * 
+	 * @param trades
+	 * @param timeInMillis
+	 * @param intervalInMillis
+	 * @return
+	 */
+	public static List<Trade> filterTradesByStocks(List<Trade> trades, Stock stock) {
+		return trades.stream().filter(trade -> trade.stock == stock).collect(Collectors.toList());
 	}
 
 }
