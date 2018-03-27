@@ -19,17 +19,17 @@ public class StockParameterCalcTest {
 	@Test
 	public void testCalculateDividendYield() {
 		Stock stock1 = new Stock(Type.COMMON, "POP", 8.0, 0, 100.0);
-		Stock stock3 = new Stock(Type.PREFERRED, "GIN", 8.0, 2, 100.0);
+		Stock stock2 = new Stock(Type.PREFERRED, "GIN", 8.0, 2, 100.0);
 		assertEquals(StockParameterCalc.calculateDividendYield(stock1, 8.0), 1.0, delta);
-		assertEquals(StockParameterCalc.calculateDividendYield(stock3, 2.0), 1.0, delta);
+		assertEquals(StockParameterCalc.calculateDividendYield(stock2, 2.0), 1.0, delta);
 	}
 
 	@Test
 	public void testCalculatePERatio() {
 		Stock stock1 = new Stock(Type.COMMON, "POP", 8.0, 0, 100.0);
-		Stock stock3 = new Stock(Type.PREFERRED, "GIN", 8.0, 2, 100.0);
+		Stock stock2 = new Stock(Type.PREFERRED, "GIN", 8.0, 2, 100.0);
 		assertEquals(StockParameterCalc.calculatePERatio(stock1, 8.0), 1.0, delta);
-		assertEquals(StockParameterCalc.calculatePERatio(stock3, 2.0), 1.0, delta);
+		assertEquals(StockParameterCalc.calculatePERatio(stock2, 2.0), 1.0, delta);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
